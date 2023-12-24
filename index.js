@@ -10,11 +10,11 @@ const dotenv = require('dotenv');
 dotenv.config();
 
 const TOKEN = process.env.TOKEN;
-const DISCORD_KEY = process.env.DISCORD_KEY;
+const CLIENT_ID = process.env.CLIENT_ID;
 const GUILD_ID = process.env.GUILD_ID;
 
 // Create a new client instance
-// iscord.js 클라이언트가 예상대로 작동하려면 인텐트 옵션이 필요. 
+// discord.js 클라이언트가 예상대로 작동하려면 인텐트 옵션이 필요.
 // 길드, 채널 및 역할에 대한 캐시가 채워지고 내부용으로 사용 가능하도록 보장한다. (길드 == 디스코드 서버)
 const client = new Client({ 
   intents: [
@@ -26,7 +26,7 @@ const client = new Client({
 
 const rest = new REST({version: '10'}).setToken(TOKEN);
 
-// 명령어 읽어오기
+// 명령어 읽기
 client.commands = new Collection();
 const commands = [];
 
@@ -78,7 +78,7 @@ client.on(Events.InteractionCreate, async interaction => {
 (async () => {
   try {
     console.log('Started Refreshing application (/) commands.');
-    const data = await rest.put(Routes.applicationGuildCommands(DISCORD_KEY, GUILD_ID), {
+    const data = await rest.put(Routes.applicationGuildCommands(CLIENT_ID, GUILD_ID), {
       body: commands,
     });
     console.log(`Successfully reloaded ${data.length} application (/) commands.`);
