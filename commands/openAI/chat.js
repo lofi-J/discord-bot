@@ -9,7 +9,7 @@ const openai = new OpenAI({apiKey: AI_KEY});
 module.exports = {
   data: new SlashCommandBuilder()
     .setName('chat')
-    .setDescription('openAI API를 사용하기')
+    .setDescription('간단한 질문에 대한 답변을 해줌')
     .addStringOption(option =>
       option.setName('msg')
         .setDescription('질문 내용')
